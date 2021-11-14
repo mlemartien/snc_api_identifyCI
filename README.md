@@ -2,7 +2,7 @@
 
 This code snippet is an example for the ServiceNow IRE API `SNC.IdentificationEngineScriptableApi.identifyCI`.
 
-In this example we try to identify a computer using a combination of its name (direct identification) and one of its network adapters (lookup identification). CMDB table `cmdb_ci_network_adapter` has a reference field `cmdb_ci` relating it to is parent CI.
+In this example we try to identify a computer using a combination of its name (direct identification) and one of its network adapters (lookup identification). CMDB table `cmdb_ci_network_adapter` has a reference field `cmdb_ci` referencing its parent CI.
 
 Example:
 ```js
