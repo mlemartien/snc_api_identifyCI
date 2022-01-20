@@ -2,12 +2,12 @@
 
 This code snippet is an example for the ServiceNow IRE API `SNC.IdentificationEngineScriptableApi.identifyCI`.
 
-In this example we try to identify a computer using a combination of its name (direct identification) and one of its network adapters (lookup identification). CMDB table `cmdb_ci_network_adapter` has a reference field `cmdb_ci` referencing its parent CI.
+In this example we try to identify a hardware CI using a combination of its name (direct identification) and one of its network adapters (lookup identification). CMDB table `cmdb_ci_network_adapter` has a reference field `cmdb_ci` referencing its parent CI.
 
 Example:
 ```js
 // If CI has been identified, will end up in this GlideRecord
-var grServer;
+var grHardware;
 
 // Build the payload to identify this CI 
 var identificationPayload = {
@@ -44,19 +44,19 @@ var output = JSON.parse(SNC.IdentificationEngineScriptableApi.identifyCI(JSON.st
 // and if so fetch it
 if (JSUtil.notNil(output)) {
     if (output.items[0].operation !== "INSERT") {
-        grServer = new GlideRecordUtil().getCIGR(output.items[0].sysId);
+        grHardware = new GlideRecordUtil().getCIGR(output.items[0].sysId);
     }
 }
 
 // Display the output
-if (JSUtil.notNil(grServer)) {
-    gs.debug("Successfully identified the server " + grServer.getDisplayValue() + " of class " + grServer.getValue("sys_class_name"));
+if (JSUtil.notNil(grHardware)) {
+    gs.debug("Successfully identified the hardware " + grHardware.getDisplayValue() + " of class " + grHardware.getValue("sys_class_name"));
 } else {
-    gs.debug("This server does not exist");
+    gs.debug("This hardware does not exist");
 }
 ```
 
 Output:
 ```
-*** Script: [DEBUG] Successfully identified the server *JEMPLOYEE-IBM of class cmdb_ci_computer
+*** Script: [DEBUG] Successfully identified the hardware *JEMPLOYEE-IBM of class cmdb_ci_computer
 ```
